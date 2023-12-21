@@ -1,0 +1,137 @@
+extends ../layout
+
+block content
+    div.gradient-background
+        header.header
+            h1 Читаем вместе с BookShare!
+            hr
+        article
+        div.main
+            div.content
+                h1= title
+                br
+                p
+                |Вы можете получить доступ к обширной коллекции книг, доступных на нашем сайте. Мы предлагаем широкий выбор жанров, включая художественную литературу, нон-фикшн, детские книги и многое другое.
+                br
+                br
+                button(id='create_order') Создать
+                button(id='delete_order') Удалить
+                button(id='update_order') Изменить
+                button(id='found_order') Поиск
+                table
+                    tr
+                        th id
+                        th Книга
+                        th Читатель
+                        th Статус
+                    each item in book_issuance
+                        tr
+                            td= item.id
+                            td= item.id_book
+                            td= item.id_reader
+                            td= item.id_status
+
+                div#create_order_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Создать заказ
+                          a#create_order_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpBook") Книга
+                              select#inpBook
+                                each item in books || []
+                                    option(value= item.id)= item.label
+                            div.q-form-data
+                            label(for="inpReader") Читатель
+                              select#inpReader
+                                each item in readers
+                                    option(value= item.id)= item.label
+                            div.q-form-data
+                              label(for="inpStatus") Статус
+                              select#inpStatus
+                                each item in status || []
+                                    option(value= item.id)= item.label                
+
+                        div.q-buttons
+                          a#submit_create_order Создать
+                          a#cancel_create_order Отменить
+              
+                div#delete_order_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Удалить заказ
+                          a#delete_order_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpId") ID
+                              select#inpId
+                                each item in book_issuance
+                                    option(value= item.id)= item.id
+
+                        div.q-buttons
+                          a#submit_delete_order Удалить
+                          a#cancel_delete_order Отменить
+
+                div#update_order_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Изменить данные о заказе
+                          a#update_order_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpUpid") ID
+                              select#inpUpid
+                                each item in book_issuance
+                                    option(value= item.id)= item.id
+                            div.q-form-data
+                            label(for="inpUpbook") Книга
+                              select#inpUpbook
+                                each item in books
+                                    option(value= item.id)= item.label
+                            div.q-form-data
+                            label(for="inpUpreader") Читатель
+                              select#inpUpreader
+                                each item in readers
+                                    option(value= item.id)= item.label
+                            div.q-form-data
+                              label(for="inpUpstatus") Статус
+                              select#inpUpstatus
+                                each item in status
+                                    option(value= item.id)= item.label                
+
+                        div.q-buttons
+                          a#submit_update_order Изменить
+                          a#cancel_update_order Отменить
+
+                div#found_order_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Результат
+                          a#found_order_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpFbook") Книга
+                              select#inpFbook
+                                each item in books
+                                    option(value= item.id)= item.id
+
+                        div.q-buttons
+                          a#submit_found_order Поиск
+                          a#cancel_found_order Отменить
+    
+    footer.footer
+      ul.menu
+        li.menu__item
+          a.menu__link(href='/') Книги
+        li.menu__item
+          a.menu__link(href='/') Авторы
+        li.menu__item
+          a.menu__link(href='/') Жанры
+        li.menu__item
+          a.menu__link(href='/') Выдача книг
+      p @2023 Димитриева Ольга
+    script(type='module', src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+    script(nomodule, src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+
+        

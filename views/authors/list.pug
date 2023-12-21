@@ -1,0 +1,92 @@
+extends ../layout
+
+block content
+    div.gradient-background
+        header.header
+            h1 Читаем вместе с BookShare!
+            hr
+        article
+        div.main
+            div.content
+                h1= title
+                br
+                img(src='./images/books.jpg' alt='books' style='width:200px; height:200px;')
+                p
+                |Ознакомьтесь с каталогом писателей, чьи произведения доступны на нашем сайте. Наша цель - познакомить вас с лучшими писателями современности и помочь вам найти книги по вкусу. Приятного просмотра!
+                br
+                br
+                button(id='create_author') Добавить
+                button(id='delete_author') Удалить
+                button(id='update_author') Изменить
+                table
+                    tr
+                        th id
+                        th ФИО
+                    each item in authors
+                        tr
+                            td= item.id
+                            td= item.fio
+              
+                div#create_author_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Добавить автора
+                          a#create_author_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpFio") ФИО
+                              input#inpFio(type="text")
+                          
+                        div.q-buttons
+                          a#submit_create_author Добавить
+                          a#cancel_create_author Отменить
+
+                div#delete_author_popup.q-window
+                      div.q-window-block(style="width:400px;height:220;margin:-150px 0 0 -400px")
+                        div.q-window-header Удалить автора
+                          a#delete_author_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpId") ID  
+                              select#inpId
+                                each item in authors  
+                                    option(value=item.id)= item.id  
+
+                        div.q-buttons
+                          a#submit_delete_author Удалить
+                          a#cancel_delete_author Отменить
+
+                div#update_author_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Изменить данные об авторе
+                          a#update_author_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpUpid") ID
+                              select#inpUpid
+                                each item in authors
+                                    option(value= item.id)= item.id
+                            div.q-form-data
+                              label(for="inpUpFio") ФИО
+                              input#inpUpfio(type="text")
+                          
+                        div.q-buttons
+                          a#submit_update_author Изменить
+                          a#cancel_update_author Отменить
+
+    footer.footer
+      ul.menu
+        li.menu__item
+          a.menu__link(href='/') Книги
+        li.menu__item
+          a.menu__link(href='/') Авторы
+        li.menu__item
+          a.menu__link(href='/') Жанры
+        li.menu__item
+          a.menu__link(href='/') Выдача книг
+      p @2023 Димитриева Ольга
+    script(type='module', src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+    script(nomodule, src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+

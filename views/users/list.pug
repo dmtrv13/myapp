@@ -1,0 +1,116 @@
+extends ../layout
+
+block content
+    div.gradient-background
+        header.header
+            h1 Читаем вместе с BookShare!
+            hr
+        article
+        div.main
+            div.content
+                h1= title
+                br
+                p
+                |Список пользователей
+                br
+                br
+                button(id='create_user') Добавить
+                button(id='delete_user') Удалить
+                button(id='update_user') Изменить
+                table#tbl_users
+                    tr
+                        th id
+                        th Имя
+                        th Логин
+                        th Роль
+                    each item in users
+                        tr
+                            td= item.id
+                            td= item.fio
+                            td= item.login
+                            td= item.id_role
+            
+                div#create_user_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Добавить пользователя
+                          a#create_user_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpFio") Имя
+                              input#inpFio(type="text")
+                            div.q-form-data
+                              label(for="inpLogin") Логин
+                              input#inpLogin(type="text")
+                            div.q-form-data
+                            label(for="inpRole") Роль
+                              select#inpRole
+                                each item in roles
+                                    option(value=item.id)= item.label
+                            div.q-form-data
+                              label(for="inpPass") Пароль
+                              input#inpPass(type="text")
+
+                        div.q-buttons
+                          a#submit_create_user Добавить
+                          a#cancel_create_user Отменить
+
+                div#delete_user_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Удалить пользователя
+                          a#delete_user_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpId") ID
+                              select#inpId
+                                each item in users
+                                    option(value=item.id)= item.id
+
+                        div.q-buttons
+                          a#submit_delete_user Удалить
+                          a#cancel_delete_user Отменить
+
+                div#update_user_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Изменить данные о пользователе
+                          a#update_user_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpUpid") ID
+                              select#inpUpid
+                                each item in users  
+                                    option(value= item.id)= item.id
+                            div.q-form-data
+                              label(for="inpUpfio") Имя
+                              input#inpUpfio(type="text")
+                            div.q-form-data
+                              label(for="inpUplogin") Логин
+                              input#inpUplogin(type="text")
+                            div.q-form-data
+                            label(for="inpUprole") Роль
+                              select#inpUprole
+                                each item in roles
+                                    option(value=item.id)= item.label
+                            div.q-form-data
+                              label(for="inpUppass") Пароль
+                              input#inpUppass(type="text")
+
+                        div.q-buttons
+                          a#submit_update_user Изменить
+                          a#cancel_update_user Отменить
+    footer.footer
+      ul.menu
+        li.menu__item
+          a.menu__link(href='/') Книги
+        li.menu__item
+          a.menu__link(href='/') Авторы
+        li.menu__item
+          a.menu__link(href='/') Жанры
+        li.menu__item
+          a.menu__link(href='/') Выдача книг
+      p @2023 Димитриева Ольга
+    script(type='module', src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+    script(nomodule, src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+

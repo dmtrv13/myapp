@@ -1,0 +1,98 @@
+extends ../layout
+
+block content
+    div.gradient-background
+        header.header
+            h1 Читаем вместе с BookShare!
+            hr
+        article
+        div.main
+            div.content
+                h1= title
+                br
+                p
+                |Наши любимые читатели
+                br
+                br
+                button(id='create_reader') Добавить
+                button(id='delete_reader') Удалить
+                button(id='update_reader') Изменить
+                table
+                    tr
+                        th id
+                        th Имя
+                        th Телефон
+                    each item in readers
+                        tr
+                            td= item.id
+                            td= item.label  
+                            td= item.phone_number
+              
+                div#create_reader_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Добавить читателя
+                          a#create_reader_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpLabel") Имя
+                              input#inpLabel(type="text")
+                            div.q-form-data
+                              label(for="inpPhone") Телефон
+                              input#inpPhone(type="text")
+                          
+                        div.q-buttons
+                          a#submit_create_reader Добавить
+                          a#cancel_create_reader Отменить
+
+                div#delete_reader_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Удалить читателя
+                          a#delete_reader_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpId") ID
+                              select#inpId
+                                each item in readers  
+                                    option(value=item.id)= item.id                
+
+                        div.q-buttons
+                          a#submit_delete_reader Удалить
+                          a#cancel_delete_reader Отменить
+
+                div#update_reader_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Изменить данные о читателе
+                          a#update_reader_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                            label(for="inpUpid") ID
+                              select#inpUpid
+                                each item in readers  
+                                    option(value= item.id)= item.id
+                            div.q-form-data
+                              label(for="inpUplabel") Имя
+                              input#inpUplabel(type="text")
+                            div.q-form-data
+                              label(for="inpUpphone") Телефон
+                              input#inpUpphone(type="text")
+                          
+                        div.q-buttons
+                          a#submit_update_reader Изменить
+                          a#cancel_update_reader Отменить
+    footer.footer
+      ul.menu
+        li.menu__item
+          a.menu__link(href='/') Книги
+        li.menu__item
+          a.menu__link(href='/') Авторы
+        li.menu__item
+          a.menu__link(href='/') Жанры
+        li.menu__item
+          a.menu__link(href='/') Выдача книг
+      p @2023 Димитриева Ольга
+    script(type='module', src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+    script(nomodule, src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+

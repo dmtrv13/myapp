@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+    h1= title
+    button(id='create_genre') Добавить
+    button(id='delete_genre') Удалить
+    button(id='update_genre') Изменить
+    table
+        tr
+            th id
+            th Название
+        each item in genres
+            tr
+                td= item.id
+                td= item.label
+               
+    div#create_genre_popup.q-window
+          div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+            div.q-window-header Добавить жанр
+              a#create_genre_popup_close(style="position: relative;left: 200px;") X
+            div.q-window-body.q-form
+              div.q-window-filters-form
+                div.q-form-data
+                  label(for="inpLabel") Название
+                  input#inpLabel(type="text")
+               
+            div.q-buttons
+              a#submit_create_genre Добавить
+              a#cancel_create_genre Отменить
+
+    div#delete_genre_popup.q-window
+          div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+            div.q-window-header Удалить жанр
+              a#delete_genre_popup_close(style="position: relative;left: 200px;") X
+            div.q-window-body.q-form
+              div.q-window-filters-form
+                div.q-form-data
+                  label(for="inpId") ID
+                  select#inpId
+                    each item in genres
+                        option(value=item.id)= item.id
+           
+            div.q-buttons
+              a#submit_delete_genre Удалить
+              a#cancel_delete_genre Отменить
+
+    div#update_genre_popup.q-window
+          div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+            div.q-window-header Изменить данные о жанре
+              a#update_genre_popup_close(style="position: relative;left: 200px;") X
+            div.q-window-body.q-form
+              div.q-window-filters-form
+                div.q-form-data
+                label(for="inpUpid") ID
+                  select#inpUpid
+                    each item in genres  
+                        option(value= item.id)= item.id
+                div.q-form-data
+                  label(for="inpUplabel") Название
+                  input#inpUplabel(type="text")
+               
+            div.q-buttons
+              a#submit_update_genre Изменить
+              a#cancel_updatee_genre Отменить

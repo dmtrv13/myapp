@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  div.gradient-background
+    header.header
+        h1 Читаем вместе с BookShare!
+        hr
+    article
+    div.main
+        div.content
+            if user
+               div
+                 span= user.fio
+            br
+            br
+            ul
+              li
+                a(href='/') Главная страница
+                if user
+                  if can.view_clients
+                    li
+                      a(href='/readers') Читатели
+                  if can.view_orders
+                    li
+                      a(href='/book_issuance') Выдача книг
+                  if can.view_users
+                    li
+                      a(href='/users') Пользователи
+                  if can.view_books
+                    li
+                      a(href='/books') Книги
+                  if can.view_authors
+                    li
+                      a(href='/authors') Авторы
+                  li
+                    a(href='', id='Logout') Выйти
+                else
+                    li
+                        a(href='', id='Login') Войти
+        img(src='./images/girl.jpg' alt='books' style='width:300px; height:300px;')
+        h1 Добро пожаловать на нашу библиотечную систему
+          p Здесь вы можете найти все нужные книги, авторов и жанры.
+          p Мы также предоставляем информацию о читателях и заказах.
+        
+
+    footer.footer
+      ul.menu
+        li.menu__item
+          a.menu__link(href='/') Книги
+        li.menu__item
+          a.menu__link(href='/') Авторы
+        li.menu__item
+          a.menu__link(href='/') Жанры
+        li.menu__item
+          a.menu__link(href='/') Выдача книг
+      p @2023 Димитриева Ольга
+    script(type='module', src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+    script(nomodule, src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+

@@ -1,0 +1,124 @@
+extends ../layout
+
+block content
+    div.gradient-background
+        header.header
+            h1 Читаем вместе с BookShare!
+            hr
+        article
+        div.main
+            div.content
+                h1= title
+                br
+                img(src='./images/books1.jpg' alt='books' style='width:200px; height:200px;')
+                p
+                |Здесь вы найдете всю необходимую информацию о книгах, включая название, автора, жанр, год издательства. 
+                br
+                br
+                button(id='create_book') Добавить
+                button(id='delete_book') Удалить
+                button(id='update_book') Изменить
+                table
+                    tr
+                        th id
+                        th Название
+                        th Автор
+                        th Жанр
+                        th Год издательства
+
+                    each item in books
+                        tr
+                            td= item.id
+                            td= item.label
+                            td= item.id_author
+                            td= item.id_genre
+                            td= item.year_of_publication
+                                          
+                div#create_book_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Добавить книгу
+                          a#create_book_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpLabel") Название
+                              input#inpLabel(type="text")
+                            div.q-form-data
+                              label(for="inpAuthor") Автор
+                              select#inpAuthor
+                                each item in authors
+                                    option(value=item.id)= item.fio
+                            div.q-form-data
+                              label(for="inpGenre") Жанр
+                              select#inpGenre
+                                each item in genres
+                                    option(value=item.id)= item.label
+                            div.q-form-data
+                              label(for="inpYear") Год издательства
+                              input#inpYear(type="text")
+                          
+                        div.q-buttons
+                          a#submit_create_book Добавить
+                          a#cancel_create_book Отменить
+
+                div#delete_book_popup.q-window
+                      div.q-window-block(style="width:400px;height:220;margin:-150px 0 0 -400px")
+                        div.q-window-header Удалить книгу
+                          a#delete_book_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpId") ID
+                              select#inpId
+                                each item in books
+                                    option(value=item.id)= item.id        
+
+                        div.q-buttons
+                          a#submit_delete_book Удалить
+                          a#cancel_delete_book Отменить
+
+                div#update_book_popup.q-window
+                      div.q-window-block(style="width:400px;height:220px;margin:-150px 0 0 -400px")
+                        div.q-window-header Изменить данные о книге
+                          a#update_book_popup_close(style="position: relative;left: 200px;") X
+                        div.q-window-body.q-form
+                          div.q-window-filters-form
+                            div.q-form-data
+                              label(for="inpUpid") ID
+                              select#inpUpid
+                                each item in books
+                                    option(value=item.id)= item.id
+                            div.q-form-data
+                              label(for="inpUplabel") Название
+                              input#inpUplabel(type="text")
+                            div.q-form-data
+                              label(for="inpUpauthor") Автор
+                              select#inpUpauthor
+                                each item in authors
+                                    option(value=item.id)= item.fio
+                            div.q-form-data
+                              label(for="inpUpgenre") Жанр
+                              select#inpUpgenre
+                                each item in genres
+                                    option(value=item.id)= item.label
+                            div.q-form-data
+                              label(for="inpUpyear") Год издательства
+                              input#inpUpyear(type="text")
+                          
+                        div.q-buttons
+                          a#submit_update_book Изменить
+                          a#cancel_update_book Отменить
+    footer.footer
+      ul.menu
+        li.menu__item
+          a.menu__link(href='/') Книги
+        li.menu__item
+          a.menu__link(href='/') Авторы
+        li.menu__item
+          a.menu__link(href='/') Жанры
+        li.menu__item
+          a.menu__link(href='/') Выдача книг
+      p @2023 Димитриева Ольга
+    script(type='module', src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js')
+    script(nomodule, src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js')
+
